@@ -1,10 +1,8 @@
 from django.shortcuts import render, HttpResponse
+from .models import Dashboard
 
 # Create your views here.
 
-def index(request):
-    return HttpResponse("Hello World!")
-
-
-def sair(request):
-    return HttpResponse("Goodbye!")
+def dashboard_list(request):
+    dashboards = Dashboard.objects.all()
+    return render(request, "app/dashboard_list.html", {'dashboards': dashboards})
