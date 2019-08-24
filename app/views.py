@@ -25,3 +25,21 @@ def dashboard_new(request):
 	else:
 		form = DashboardForm()
 	return render(request, 'app/dashboard_edit.html', {'form': form})
+
+
+def dashboard_edit(request, pk):
+	dashboard = get_object_or_404(Dashboard, pk=pk)
+	if request.method == 'POST':
+		form = DashboardForm(request.POST, instance=dashboard)
+		if form.is_valid():
+			dashboard = form.save()
+			return redirect('dashboard_detail', pk=dashboard.pk)
+	else:
+		form = DashboardForm(instance=dashboard)
+	return render(request, 'app/dashboard_edit.html', {'form': form})
+
+
+def dashboard_delete(request, pk):
+	dashboard = get_object_or_404(Dashboard, pk=pk)
+	dashboard.delete()
+	return redirect('dashboard_list')

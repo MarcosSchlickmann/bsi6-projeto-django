@@ -1,6 +1,6 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-<h1>{{ dashboard.title }}</h1>
-
+	<h1>{{ dashboard.title }} <a href="{% url 'dashboard_delete' pk=dashboard.pk %}" class="btn btn-sm btn-danger">Remover</a></h1>
+	<p>{{ dashboard.description|linebreaksbr }}</p>
 {% endblock %}
